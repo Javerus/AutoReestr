@@ -13,7 +13,7 @@ df = pd.read_excel(path_file_read_and_write_excel, sheet_name='БД (3)')
 # workbook_active = workbook.active
 
 # открываем книгу для записи данных
-path_file_write_excel = '/Users/gregoryreyn/Documents/Developer/ProjectPTO/Auto_reestr_excel_v1/Реестр ИД.xlsx'
+path_file_write_excel = '/Users/gregoryreyn/Desktop/Реестр ИД.xlsx'
 workbook = openpyxl.load_workbook(path_file_write_excel)
 # выбираем лист, в который будем записывать значения
 worksheet = workbook['1']
