@@ -8,6 +8,7 @@ namber_acts, data_acts, named_work, IS, materials = [], [], [], [], []
 finel_act, finel_IS, finel_materials, finel_osi_otm, finel_data_acts = [], [], [], [], []
 data_acts = finel_data_acts
 
+
 def path_file():
     # Определяем путь
     path_file_read_and_write_excel = '/Users/gregoryreyn/Desktop/Общая БД.xlsm'
