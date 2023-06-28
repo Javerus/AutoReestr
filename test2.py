@@ -17,17 +17,21 @@ def open_read_files():
     print('Открываем файл чтения', file_path_o)
     return file_path_o
 
+open_read_files()
+
 
 def open_file_write():
     # Открываем файл записи
     file_path_w = filedialog.askopenfilename()
     print('Открываем файл записи', file_path_w)
+    open_book_write(file_path_w)
     return file_path_w
 
 
 def read_files(file_path_o):
     # Читаем данные
     path_file_read_and_write_excel = file_path_o
+    reading_data(path_file_read_and_write_excel)
     return path_file_read_and_write_excel
 
 
@@ -40,13 +44,13 @@ def open_book_write(file_path_w):
 
 def reading_data(path_file_read_and_write_excel):
     # читаем лист
-    df = pd.read_excel(path_file_read_and_write_excel, sheet_name='БД (5)')
+    df = pd.read_excel(path_file_read_and_write_excel, sheet_name='')
     return df
 
 
 def open_list_write(workbook):
     # выбираем лист, в который будем записывать значения
-    worksheet = workbook['Реестр']
+    worksheet = workbook['']
     return worksheet
 
 
@@ -133,6 +137,7 @@ def all_write(file_path_w, worksheet, workbook, finel_act, finel_IS, finel_osi_o
         worksheet.cell(row=starting_row + 2, column=starting_column, value=write_finel_materials)
         starting_row += 3
     workbook_save = workbook.save(file_path_w)
+
     # Проверка финальных данных
     print('финальные акты:', finel_act)
     print('Дата акта:', Data_Acts)
