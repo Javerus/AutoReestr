@@ -1,19 +1,18 @@
 import pandas as pd
 import openpyxl
 import itertools
-# list_workbook = print(input('Лист книги'))
 
 
 # Читаем данные
-path_file_read_and_write_excel = '/Users/gregoryreyn/Documents/Developer/ProjectPTO_2/AutoReestr(v1)/Общая БД.xlsm'
-df = pd.read_excel(path_file_read_and_write_excel, sheet_name='БД (3)')
+path_file_read_and_write_excel = '/Users/gregoryreyn/Desktop/Общая БД 2.xlsm'
+df = pd.read_excel(path_file_read_and_write_excel, sheet_name='БД (4)')
 
 # # Открыть и активировать книгу
 # workbook = openpyxl.load_workbook(path_file_read_and_write_excel)
 # workbook_active = workbook.active
 
 # открываем книгу для записи данных
-path_file_write_excel = '/Users/gregoryreyn/Documents/Developer/ProjectPTO_2/AutoReestr(v1)/Реестр ИД.xlsx'
+path_file_write_excel = '/Users/gregoryreyn/Desktop/Реестр ИД.xlsx'
 workbook = openpyxl.load_workbook(path_file_write_excel)
 # выбираем лист, в который будем записывать значения
 worksheet = workbook['Реестр']
@@ -93,7 +92,7 @@ for write_finel_act, write_finel_IS, write_finel_materials, write_data_Acts, wri
 
 
 
-workbook_save = workbook.save('Реестр ИД.xlsx')
+workbook_save = workbook.save('/Users/gregoryreyn/Desktop/Реестр ИД.xlsx')
 
 # print(Named_work)
 # проверяем написанную херню
