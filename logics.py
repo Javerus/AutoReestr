@@ -1,22 +1,28 @@
-import itertools
 from interface import *
 from files_manager import *
-# Переменные для записи данных
+import itertools
+
 
 """ модуль: логика"""
 
 
+# Переменные для записи данных
 Namber_Acts, Data_Acts, Named_work, IS, materials = [], [], [], [], []
+pd_namber_acts = '№ акта'
+pd_data_acts = 'дата акта'
+pd_named_work = '1. К освидетельствованию предъявлены следующие работы:'
+pd_is = '4. Предъявлены документы'
+pd_materials = '3. При выполнении работ применены:'
 
 
 def parsing_data(df):
     # парсим и записываем данные в переменные
     for index, row in df.iterrows():
-        Namber_Acts.append(row['№ акта'])
-        Data_Acts.append(row['дата акта'])
-        Named_work.append(row['1. К освидетельствованию предъявлены следующие работы:'])
-        IS.append(row['4. Предъявлены документы'])
-        materials.append(row['3. При выполнении работ применены:'])
+        Namber_Acts.append(row[pd_namber_acts])
+        Data_Acts.append(row[pd_data_acts])
+        Named_work.append(row[pd_named_work])
+        IS.append(row[pd_is])
+        materials.append(row[pd_materials])
 
 
 def act_gen():
@@ -50,14 +56,15 @@ def materials_gen():
 
 def osi_gen(finel_act):
     finel_osi_otm = []  # новый список, куда будут записываться значения
+    in_osi = 'в осях'
     for item in finel_act:
-        if "в осях" in item:
-            new_item = item.split("в осях", 1)[1].strip()
-            finel_osi_otm.append("в осях " + new_item)
+        if in_osi in item:
+            new_item = item.split(in_osi, 1)[1].strip()
+            finel_osi_otm.append(in_osi + new_item)
     return finel_osi_otm
 
 
-def all_write(file_path_w, worksheet, workbook, finel_act, finel_IS, finel_osi_otm):
+def all_write(OFW, worksheet, workbook, finel_act, finel_IS, finel_osi_otm):
     starting_row = 12  # определяем ячейку, с которой начнём записывать значения
     starting_column = 3
     for write_finel_act, write_finel_IS, write_finel_materials, write_data_Acts, write_finel_osi_otm in itertools.zip_longest(
@@ -68,7 +75,7 @@ def all_write(file_path_w, worksheet, workbook, finel_act, finel_IS, finel_osi_o
         worksheet.cell(row=starting_row + 1, column=starting_column, value=write_finel_IS)
         worksheet.cell(row=starting_row + 2, column=starting_column, value=write_finel_materials)
         starting_row += 3
-    workbook_save = workbook.save(file_path_w)
+    workbook_save = workbook.save(OFW)
     # Проверка финальных данных
     print('финальные акты:', finel_act)
     print('Дата акта:', Data_Acts)
@@ -82,6 +89,7 @@ def all_write(file_path_w, worksheet, workbook, finel_act, finel_IS, finel_osi_o
 
 
 def main():
+    # pass
     # вызываем функцию open_read_files()
     file_path_o = open_read_files()
     # вызываем функцию open_file_write()

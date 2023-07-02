@@ -1,15 +1,10 @@
+from logics import *
 import openpyxl
 import tkinter as tk
-from logics import *
 
 
 """ модуль: интерфейс"""
 
-
-def show_sheet(sheet_name, root):
-    # Функция, которая будет вызываться при нажатии на кнопку листа
-    print(f"Имя выбранного листа: {sheet_name}")
-    root.destroy()
 
 
 def get_sheet_name():
@@ -28,7 +23,7 @@ def get_sheet_name():
 
 def button():
     root = tk.Tk()
-    root.title("кря")
+    root.title("Доступныее функции")
     # button1 = tk.Button(root, text="Открыть файл чтения", command='')
     # button1.pack()
     # button2 = tk.Button(root, text="Открыть файл записи", command='')
