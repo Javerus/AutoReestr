@@ -1,76 +1,12 @@
-from tkinter import filedialog
-import tkinter as tk
-import pandas as pd
-import openpyxl
 import itertools
-
+from interface import *
+from files_manager import *
 # Переменные для записи данных
-Namber_Acts, Data_Acts, Named_work, IS, materials = [], [], [], [], []
-
-
-""" модуль: работа с файлами"""
-
-
-def open_read_files():
-    # Открываем файл чтения
-    file_path_o = filedialog.askopenfilename()
-    print('Открываем файл чтения', file_path_o)
-    return file_path_o
-
-
-def open_file_write():
-    # Открываем файл записи
-    file_path_w = filedialog.askopenfilename()
-    print('Открываем файл записи', file_path_w)
-    return file_path_w
-
-
-def read_files(file_path_o):
-    # Читаем данные
-    path_file_read_and_write_excel = file_path_o
-    return path_file_read_and_write_excel
-
-
-def open_book_write(file_path_w):
-    # Открываем книгу для записи данных
-    path_file_write_excel = file_path_w
-    workbook = openpyxl.load_workbook(path_file_write_excel)
-    return workbook
-
-
-def reading_data(path_file_read_and_write_excel):
-    # читаем лист
-    df = pd.read_excel(path_file_read_and_write_excel, sheet_name='БД (5)')
-    return df
-
-
-def open_list_write(workbook):
-    # выбираем лист, в который будем записывать значения
-    worksheet = workbook['Реестр']
-    return worksheet
-
-
-def show_sheet(sheet_name, root):
-    # Функция, которая будет вызываться при нажатии на кнопку листа
-    print(f"Имя выбранного листа: {sheet_name}")
-    root.destroy()
-
-
-def get_sheet_name():
-    # Открытие книги Excel
-    wb = openpyxl.load_workbook('/Users/gregoryreyn/Desktop/Общая БД 2.xlsm')
-    # Создание окна с кнопками листов
-    root = tk.Tk()
-    root.title("Выберите лист")
-    for i, sheet in enumerate(wb.sheetnames):
-        # Создание кнопки с именем листа
-        btn = tk.Button(root, text=sheet, command=lambda sheet_name=sheet: show_sheet(sheet_name, root))
-        btn.grid(row=0, column=i)
-    root.mainloop()
-    return root
-
 
 """ модуль: логика"""
+
+
+Namber_Acts, Data_Acts, Named_work, IS, materials = [], [], [], [], []
 
 
 def parsing_data(df):
@@ -170,23 +106,3 @@ def main():
     finel_osi_otm = osi_gen(finel_act)
     # вызываем функцию all_write()
     all_write(file_path_w, worksheet, workbook, finel_act, finel_IS, finel_osi_otm)
-
-
-""" модуль: интерфейс"""
-
-
-def button():
-    root = tk.Tk()
-    root.title("кря")
-    button1 = tk.Button(root, text="Открыть файл чтения", command='')
-    button1.pack()
-    button2 = tk.Button(root, text="Открыть файл записи", command='')
-    button2.pack()
-    button3 = tk.Button(root, text="запись", command=lambda: main())
-    button3.pack()
-    button3 = tk.Button(root, text="проверка кнопок", command=get_sheet_name)
-    button3.pack()
-    root.mainloop()
-
-
-button()
